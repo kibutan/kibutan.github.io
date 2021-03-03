@@ -1,2 +1,2 @@
 # kibutan.github.io
-Sandbox 
+This page is my Sandbox.
