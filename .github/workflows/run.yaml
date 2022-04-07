@@ -7,45 +7,45 @@ on:
       - main
 
 jobs:
- build:
-   runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-20.04
 # main ブランチを取得する
-   steps:
-     - name: Checkout
-       uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
      # Node.js のセットアップをする
-     - name: Setup Node
-       uses: actions/setup-node@v2
-       with:
-         node-version: 14.x
-         cache: yarn
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: yarn
 
       # npm install の際にキャッシュを使うよう設定
      # パッケージをインストールする
-     - name: Install dependencies
-       run: yarn --frozen-lockfile
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
 
      # ビルドする
-     - name: Build
-       run: npm run build
+      - name: Build
+        run: npm run build
 
       # 静的なHTMLとしてNext.jsアプリを生成する
       # プロジェクトルート直下にoutディレクトリができる
       # そのなかに、HTMLファイル群と、それらが読み込むJSファイル群を収めた_nextディレクトリがある
-      - name: export
-        run: npm run export
+       - name: export
+         run: npm run export
 
       # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
       # つまりHTMLからJSを読み込めない
       # これを回避するために.nojekyllファイルをoutディレクトリに作る
-      - name: add nojekyll
-        run: touch ./out/.nojekyll
+       - name: add nojekyll
+         run: touch ./out/.nojekyll
 
       # gh-pagesブランチにoutディレクトリの中身をプッシュする
       # gh-pagesブランチは自動的に作成される
-      - name: deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+       - name: deploy
+         uses: peaceiris/actions-gh-pages@v3
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./out
