@@ -7,29 +7,28 @@ on:
       - main
 
 jobs:
- build:
-   runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-20.04
 
-   steps:
-     # main ブランチを取得する
-     - name: Checkout
-       uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-     # Node.js のセットアップをする
-     - name: Setup Node
-       uses: actions/setup-node@v2
-       with:
-         node-version: 14.x
-         cache: yarn
+      # Node.js のセットアップをする
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: yarn
 
       # npm install の際にキャッシュを使うよう設定
-     # パッケージをインストールする
-     - name: Install dependencies
-       run: yarn --frozen-lockfile
+      # パッケージをインストールする
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
 
-     # ビルドする
-     - name: Build
-       run: npm run build
+      # ビルドする
+      - name: Build
+        run: npm run build
 
       # 静的なHTMLとしてNext.jsアプリを生成する
       # プロジェクトルート直下にoutディレクトリができる
