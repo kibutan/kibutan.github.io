@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Node.js のセットアップをする
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -22,11 +23,13 @@ jobs:
           cache: yarn
 
       # npm install の際にキャッシュを使うよう設定
+
       # パッケージをインストールする
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
       # ビルドする
+
       - name: Build
         run: npm run build
 
