@@ -31,13 +31,13 @@ jobs:
       # ビルドする
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       # 静的なHTMLとしてNext.jsアプリを生成する
       # プロジェクトルート直下にoutディレクトリができる
       # そのなかに、HTMLファイル群と、それらが読み込むJSファイル群を収めた_nextディレクトリがある
       - name: export
-        run: npm run export
+        run: yarn export
 
       # しかしGitHub Pagesの仕様として_から始まるディレクトリが見えず404となる
       # つまりHTMLからJSを読み込めない
